@@ -15,7 +15,7 @@ RUN useradd -u 9999 -d "$APP_HOME" -g 9999 -m -s /bin/bash app
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y wget lsb_release debconf-utils
+RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y wget lsb_release debconf-utils tee
 
 VOLUME "$APP_HOME"
 
