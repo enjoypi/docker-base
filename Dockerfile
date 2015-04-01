@@ -13,7 +13,9 @@ ENV APP_HOME /var/app_home
 RUN groupadd -g 9999 app
 RUN useradd -u 9999 -d "$APP_HOME" -g 9999 -m -s /bin/bash app
 
-RUN apt-get update && apt-get -y dist-upgrade
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y wget lsb_release debconf-utils
 
 VOLUME "$APP_HOME"
 
