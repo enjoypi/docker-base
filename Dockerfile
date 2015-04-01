@@ -21,5 +21,3 @@ VOLUME "$APP_HOME"
 
 # Clean up APT when done.
 RUN apt-get autoremove --purge && apt-get autoclean && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-USER app
