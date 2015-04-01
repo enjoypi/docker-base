@@ -12,10 +12,11 @@ CMD ["/sbin/my_init"]
 ENV APP_HOME /var/app_home
 RUN groupadd -g 9999 app
 RUN useradd -u 9999 -d "$APP_HOME" -g 9999 -m -s /bin/bash app
-USER app
-VOLUME "$APP_HOME"
 
 RUN apt-get update && apt-get -y dist-upgrade
+
+VOLUME "$APP_HOME"
+USER app
 
 # Clean up APT when done.
 RUN apt-get autoremove --purge && apt-get autoclean && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
