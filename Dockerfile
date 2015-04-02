@@ -9,7 +9,7 @@ FROM phusion/baseimage:0.9.16
 CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
-ENV APP_HOME /var/app
+ENV APP_HOME /var/apps
 RUN groupadd -g 9999 app
 RUN useradd -u 9999 -d "$APP_HOME" -g 9999 -m -s /bin/bash app
 
