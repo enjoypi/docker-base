@@ -9,15 +9,22 @@ FROM phusion/baseimage:0.9.16
 CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
-ADD clean_apt.sh /root/
-
-ENV APPS_ROOT /var/apps
-
-RUN groupadd -g 9999 app
-RUN useradd -u 9999 -d "$APPS_ROOT" -g 9999 -m -s /bin/bash app
-
 ADD sources.list /etc/apt/sources.list
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install -y wget debconf-utils
 
+RUN addgroup --gid 9999 app
+RUN adduser --no-create-home --uid 9999 --disabled-password --disabled-login --gid 9999 app
+
+ENV SERVICE_ROOT /var/apps
+RUN mkdir -p $SERVICE_ROOT
+RUN chown -R app:app $SERVICE_ROOT
+
+ENV DOCKER_BUILD_TMP_PATH /tmp/docker_build
+
+ADD . $DOCKER_BUILD_TMP_PATH
+RUN $DOCKER_BUILD_TMP_PATH/sbin/docker_cp_bin.sh
+
+WORKDIR $SERVICE_ROOT
+
 # Clean up APT when done.
-RUN /root/clean_apt.sh
+RUN docker_finalize.sh
