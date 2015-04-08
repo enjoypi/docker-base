@@ -12,8 +12,10 @@ CMD ["/sbin/my_init"]
 ADD sources.list /etc/apt/sources.list
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils
 
-RUN addgroup --gid 9999 app
-RUN adduser --no-create-home --uid 9999 --disabled-password --disabled-login --gid 9999 app
+ENV USER_ID 9999
+ENV GROUP_ID 9999
+RUN addgroup --gid $GROUP_ID app
+RUN adduser --no-create-home --uid $USER_ID --disabled-password --disabled-login --gid $GROUP_ID app
 
 ENV SERVICE_ROOT /var/apps
 RUN mkdir -p $SERVICE_ROOT
