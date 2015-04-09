@@ -14,3 +14,5 @@ for file in sbin/* ; do
      cp "$file" /usr/local/sbin/
   fi
 done
+
+cd -
