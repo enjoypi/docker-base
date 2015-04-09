@@ -1,12 +1,4 @@
-#! /bin/sh
-
-cd $DOCKER_BUILD_TMP_PATH
-# cp bin/*
-for file in bin/* ; do
-  if [ -x "$file" ] ; then
-     cp "$file" /usr/local/bin/
-  fi
-done
+#! /bin/bash
 
 # cp sbin/*
 for file in sbin/* ; do
@@ -14,5 +6,3 @@ for file in sbin/* ; do
      cp "$file" /usr/local/sbin/
   fi
 done
-
-cd -

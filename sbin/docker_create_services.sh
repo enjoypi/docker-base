@@ -1,6 +1,4 @@
-#! /bin/sh
-
-cd $DOCKER_BUILD_TMP_PATH
+#! /bin/bash
 
 # cp services/*
 for file in services/* ; do
@@ -13,5 +11,3 @@ for file in services/* ; do
     cp "$file" /etc/service/$SERVICE_NAME/run
   fi
 done
-
-cd -

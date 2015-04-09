@@ -24,7 +24,7 @@ RUN addgroup --gid $GROUP_ID app && \
 ENV DOCKER_BUILD_TMP_PATH /tmp/docker_build
 
 ADD . $DOCKER_BUILD_TMP_PATH
-RUN $DOCKER_BUILD_TMP_PATH/sbin/docker_cp_bin.sh
+RUN cd $DOCKER_BUILD_TMP_PATH && sbin/docker_cp_bin.sh
 
 WORKDIR $SERVICE_ROOT
 
