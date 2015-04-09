@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -z $1 ] then
-  rm -rf $SERVICE_ROOT/$1
-  rm -rf /etc/service/$1
+if [ -n "$1" ]; then
+  rm -rf /etc/service/$1 2> /dev/null
+  rm -rf $SERVICE_ROOT/$1 2> /dev/null
 fi
