@@ -21,10 +21,8 @@ ENV SERVICE_ROOT /var/apps
 RUN addgroup --gid $GROUP_ID app && \
     adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app
 
-ENV DOCKER_BUILD_TMP_PATH /tmp/docker_build
-
-ADD . $DOCKER_BUILD_TMP_PATH
-RUN cd $DOCKER_BUILD_TMP_PATH && sbin/docker_cp_bin.sh
+ADD . /tmp
+RUN cd /tmp && sbin/docker_cp_bin.sh
 
 WORKDIR $SERVICE_ROOT
 
