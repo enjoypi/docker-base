@@ -13,5 +13,6 @@
 
 usermod -u $USER_ID app
 chown -R app:app $SERVICE_ROOT
+ls /etc/service/
 
 exit 0
