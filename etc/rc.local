@@ -13,6 +13,5 @@
 
 usermod -u $USER_ID app
 chown -R app:app $SERVICE_ROOT
-setuser app ssh-keygen -f $SERVICE_ROOT/.ssh/id_rsa -N ""
 
 exit 0
