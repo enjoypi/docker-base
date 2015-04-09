@@ -9,7 +9,7 @@ FROM phusion/baseimage:0.9.16
 CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
-ADD sources.list /etc/apt/sources.list
+ADD etc/ /etc/
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils
 
 ENV USER_ID 9999
