@@ -9,17 +9,17 @@ FROM phusion/baseimage:0.9.16
 CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
-ADD etc/ /etc/
+ADD etc/apt/ /etc/apt
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils
+
+ADD etc/ /etc/
 
 ENV USER_ID 9999
 ENV GROUP_ID 9999
-RUN addgroup --gid $GROUP_ID app
-RUN adduser --no-create-home --uid $USER_ID --disabled-password --disabled-login --gid $GROUP_ID app
-
 ENV SERVICE_ROOT /var/apps
-RUN mkdir -p $SERVICE_ROOT
-RUN chown -R app:app $SERVICE_ROOT
+
+RUN addgroup --gid $GROUP_ID app && \
+    adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --disabled-login --gid $GROUP_ID app
 
 ENV DOCKER_BUILD_TMP_PATH /tmp/docker_build
 
