@@ -19,7 +19,7 @@ ENV GROUP_ID 9999
 ENV SERVICE_ROOT /var/apps
 
 RUN addgroup --gid $GROUP_ID app && \
-    adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --disabled-login --gid $GROUP_ID app
+    adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app
 
 ENV DOCKER_BUILD_TMP_PATH /tmp/docker_build
 
