@@ -10,7 +10,7 @@ CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
 ADD etc/ /etc/
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils zsh
 
 ENV USER_ID 9999
 ENV GROUP_ID 9999
@@ -18,6 +18,8 @@ ENV SERVICE_ROOT /var/apps
 
 RUN addgroup --gid $GROUP_ID app && \
     adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app
+
+RUN chsh -s /usr/bin/zsh app
 
 ADD . /tmp
 RUN cd /tmp && sbin/docker_cp_bin.sh
