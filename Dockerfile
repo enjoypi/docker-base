@@ -21,6 +21,9 @@ RUN addgroup --gid $GROUP_ID app && \
 
 RUN chsh -s /usr/bin/zsh app
 
+# start sshd
+RUN rm -f /etc/service/sshd/down && /etc/my_init.d/00_regen_ssh_host_keys.sh
+
 ADD . /tmp
 RUN cd /tmp && sbin/docker_cp_bin.sh
 
