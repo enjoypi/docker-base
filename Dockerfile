@@ -15,6 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install --no-install-recommends -y \
         debconf-utils \
         git \
+        make \
         net-tools \
         nginx \
         supervisor \
