@@ -14,12 +14,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get install --no-install-recommends -y \
         debconf-utils \
+        gcc \
         git \
+        libpcre3-dev \
         make \
         net-tools \
         nginx \
         supervisor \
         wget \
+        zlib1g-dev \
         zsh
 
 ENV USER_ID 9999
