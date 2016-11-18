@@ -9,22 +9,20 @@ FROM phusion/baseimage:0.9.18
 CMD ["/sbin/my_init"]
 
 # ...put your own build instructions here...
-ADD etc/ /etc/
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y dist-upgrade && apt-get install --no-install-recommends -y wget debconf-utils zsh
-
 ENV USER_ID 9999
 ENV GROUP_ID 9999
 ENV SERVICE_ROOT /var/apps
 
-RUN addgroup --gid $GROUP_ID app && \
-    adduser --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app
-
-RUN chsh -s /usr/bin/zsh app
-
+ADD etc/ /etc/
 ADD . /tmp
-RUN cd /tmp && sbin/docker_cp_bin.sh
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade -y \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y wget debconf-utils zsh \
+	&& addgroup -q --gid $GROUP_ID app \
+	&& adduser -q --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app \
+	&& chsh -s /usr/bin/zsh app \
+	&& cd /tmp && sbin/docker_cp_bin.sh \
+	&& docker_finalize.sh
 
 WORKDIR $SERVICE_ROOT
-
-# Clean up APT when done.
-RUN docker_finalize.sh
