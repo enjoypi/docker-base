@@ -18,10 +18,9 @@ ADD . /tmp
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade -y \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y wget debconf-utils zsh \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y wget debconf-utils \
 	&& addgroup -q --gid $GROUP_ID app \
 	&& adduser -q --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app \
-	&& chsh -s /usr/bin/zsh app \
 	&& cd /tmp && sbin/docker_cp_bin.sh \
 	&& docker_finalize.sh
 
