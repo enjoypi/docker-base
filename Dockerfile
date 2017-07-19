@@ -21,6 +21,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y wget debconf-utils \
 	&& addgroup -q --gid $GROUP_ID app \
 	&& adduser -q --home $SERVICE_ROOT --uid $USER_ID --disabled-password --gid $GROUP_ID app \
+	&& usermod -a -G sudo app \
+	&& echo "app ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/app \
 	&& cd /tmp && sbin/docker_cp_bin.sh \
 	&& docker_finalize.sh
 
