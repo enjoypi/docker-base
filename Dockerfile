@@ -14,7 +14,7 @@ ADD . /tmp
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade -y \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y wget debconf-utils \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y curl debconf-utils sudo wget \
 	&& addgroup -q --gid 1000 app \
 	&& adduser -q --home /opt/app --uid 1000 --disabled-password --gid 1000 app \
 	&& usermod -a -G sudo app \
