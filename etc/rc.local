@@ -11,8 +11,8 @@
 #
 # By default this script does nothing.
 
-usermod -u $USER_ID app
-chown -R app:app $SERVICE_ROOT
+usermod -u 1000 app
+chown -R app:app /opt/app
 ls /etc/service/
 
 exit 0
