@@ -13,7 +13,7 @@ ADD etc/ /etc/
 ADD . /tmp
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade -y \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq dist-upgrade -y -o Dpkg::Options::="--force-confold" \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends -y curl debconf-utils locales sudo wget \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
