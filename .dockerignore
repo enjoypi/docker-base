@@ -1,2 +1,6 @@
+.dockerignore
 .git
-etc/apt/.nouse
+Dockerfile
+LICENSE
+README.md
+
