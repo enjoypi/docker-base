@@ -12,7 +12,7 @@
 # By default this script does nothing.
 
 usermod -u 1000 app
-chown -R app:app /opt/app
+chown -R app:app /var/opt
 ls /etc/service/
 
 exit 0
