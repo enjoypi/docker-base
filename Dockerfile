@@ -19,7 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
         && chsh -s /bin/zsh app \
 	&& rm -f /etc/service/sshd/down \
 	&& /etc/my_init.d/00_regen_ssh_host_keys.sh \
-	&& apt-get autoremove --purge && apt-get autoclean && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	&& apt-get autoremove --purge && apt-get autoclean && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+	&& /bd_build/cleanup.sh && rm -rf /bd_build
 
 WORKDIR /var/opt
 
